@@ -36,17 +36,24 @@
 
 /* The Redis HyperLogLog implementation is based on the following ideas:
  *
- * * The use of a 64 bit hash function as proposed in [1], in order to don't
- *   limited to cardinalities up to 10^9, at the cost of just 1 additional
- *   bit per register.
- * * The use of 16384 6-bit registers for a great level of accuracy, using
- *   a total of 12k per key.
+ * * The use of a 64 bit hash function as proposed in [1],
+  in order to don't limited to cardinalities up to 10^9,
+  at the cost of just 1 additional bit per register.
+ * * The use of 16384 6-bit registers for a great level of accuracy, using a total of 12k per key.
  * * The use of the Redis string data type. No new type is introduced.
  * * No attempt is made to compress the data structure as in [1]. Also the
- *   algorithm used is the original HyperLogLog Algorithm as in [2], with
- *   the only difference that a 64 bit hash function is used, so no correction
- *   is performed for values near 2^32 as in [1].
- *
+ *   algorithm used is the original HyperLogLog Algorithm as in [2],
+  with the only difference that a 64 bit hash function is used, so no correction is performed for values near 2^32 as in [1].
+ *Redis HyperLogLog的实现基于以下思想:
+*
+* *使用64位哈希函数，如在[1]中提出的，
+   为了不限制到基数的10^9次方，
+   每个寄存器只需要额外的1位。
+* *使用了16384个6位寄存器，具有很高的精度，每个键总共使用12k。
+* *使用Redis字符串数据类型。没有引入新的类型。
+* *没有尝试像[1]中那样压缩数据结构。也
+*  使用的算法是原始的HyperLogLog算法，如[2]，
+   唯一的区别是a
  * [1] Heule, Nunkesser, Hall: HyperLogLog in Practice: Algorithmic
  *     Engineering of a State of The Art Cardinality Estimation Algorithm.
  *
@@ -188,6 +195,7 @@ struct hllhdr {
 };
 
 /* The cached cardinality MSB is used to signal validity of the cached value. */
+/*缓存的基数MSB用于表示缓存值的有效性。*/
 #define HLL_INVALIDATE_CACHE(hdr) (hdr)->card[7] |= (1<<7)
 #define HLL_VALID_CACHE(hdr) (((hdr)->card[7] & (1<<7)) == 0)
 

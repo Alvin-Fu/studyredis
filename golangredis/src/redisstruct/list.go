@@ -1,5 +1,6 @@
 package redisstruct
 
+import "fmt"
 
 //代表一个节点
 type MyListNode struct{
@@ -25,15 +26,27 @@ type MyList struct{
 	len int64					//链表的长度
 }
 func (l *MyList) PushBack(v interface{})*MyList{
-	//if l.tail.next == nil {
+	if l.tail.next == nil && l.len == 0 {
+		tmp := &MyListNode{
+			prev:nil,
+			next:nil,
+			value: v,
+		}
+		l.head = tmp
+		l.tail = tmp
+		fmt.Println(l)
+		l.len++
+	} else {
 		tmp := &MyListNode{
 			prev:l.tail,
 			next:nil,
 			value: v,
 		}
-		l.tail.next = tmp
+		t := l.tail
+		l.tail = tmp
+		tmp.prev = t
 		l.len++
-	//}
+	}
 	return l
 }
 
@@ -43,6 +56,8 @@ type MyListIter struct {
 	next *MyListNode	//下一个节点
 	index int64 	//方向
 }
+
+
 
 func CreateList()*MyList{
 	myList := new(MyList)
