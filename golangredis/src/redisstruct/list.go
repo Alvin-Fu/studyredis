@@ -54,9 +54,18 @@ func (l *MyList) PushBack(v interface{})*MyList{
 //链表迭代器
 type MyListIter struct {
 	next *MyListNode	//下一个节点
-	index int64 	//方向
+	direction int64 	//方向
 }
-
+func CreateIter(l *MyList,direction int64)*MyListIter{
+	myListIter := new(MyListIter)
+	if direction == 1{
+		myListIter.next = l.head
+	} else {
+		myListIter.next = l.tail
+	}
+	myListIter.direction = direction
+	return myListIter
+}
 
 
 func CreateList()*MyList{
