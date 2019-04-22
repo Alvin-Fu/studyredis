@@ -1,20 +1,28 @@
 package redisstruct
 
-import "fmt"
+var (
+	HEAD_DIRECTION int64 = 1
+	TAIL_DIRECTION int64 = 2
+)
 
 //代表一个节点
 type MyListNode struct{
-	prev, next *MyListNode
-	value interface{}
+	Prev, Next *MyListNode
+	Value interface{}
 }
-func (m *MyListNode) Prev()*MyListNode{
-	if p := m.prev; p != nil {
+
+func (m *MyListNode) GetValue()interface{}{
+	return m.Value
+}
+
+func (m *MyListNode) GetPrev()*MyListNode{
+	if p := m.Prev; p != nil {
 		return p
 	}
 	return nil
 }
-func (m *MyListNode) Next()*MyListNode{
-	if p := m.next; p != nil {
+func (m *MyListNode) GetNext()*MyListNode{
+	if p := m.Next; p != nil {
 		return p
 	}
 	return nil
@@ -22,30 +30,32 @@ func (m *MyListNode) Next()*MyListNode{
 
 //连表
 type MyList struct{
-	head, tail *MyListNode		//头结点和尾节点
-	len int64					//链表的长度
+	Head, Tail *MyListNode		//头结点和尾节点
+	Len int64					//链表的长度
 }
+
+
+
 func (l *MyList) PushBack(v interface{})*MyList{
-	if l.tail.next == nil && l.len == 0 {
+	if l.Tail.Next == nil && l.Len == 0 {
 		tmp := &MyListNode{
-			prev:nil,
-			next:nil,
-			value: v,
+			Prev:nil,
+			Next:nil,
+			Value: v,
 		}
-		l.head = tmp
-		l.tail = tmp
-		fmt.Println(l)
-		l.len++
+		l.Head = tmp
+		l.Tail = tmp
+		l.Len++
 	} else {
 		tmp := &MyListNode{
-			prev:l.tail,
-			next:nil,
-			value: v,
+			Prev:l.Tail,
+			Next:nil,
+			Value: v,
 		}
-		t := l.tail
-		l.tail = tmp
-		tmp.prev = t
-		l.len++
+		t := l.Tail
+		l.Tail = tmp
+		tmp.Prev = t
+		l.Len++
 	}
 	return l
 }
@@ -53,25 +63,35 @@ func (l *MyList) PushBack(v interface{})*MyList{
 
 //链表迭代器
 type MyListIter struct {
-	next *MyListNode	//下一个节点
-	direction int64 	//方向
+	Next,Prev *MyListNode	//下一个节点
+	Direction int64 	//方向
 }
 func CreateIter(l *MyList,direction int64)*MyListIter{
 	myListIter := new(MyListIter)
-	if direction == 1{
-		myListIter.next = l.head
+	if direction == HEAD_DIRECTION{
+		myListIter.Next = l.Head
 	} else {
-		myListIter.next = l.tail
+		myListIter.Next = l.Tail
 	}
-	myListIter.direction = direction
+	myListIter.Direction = direction
 	return myListIter
 }
-
+func MyListNext(l *MyListIter)*MyListNode{
+	nextNode := new(MyListNode)
+	if l.Next != nil {
+		if l.Direction == HEAD_DIRECTION {
+			nextNode = l.Next
+		} else {
+			nextNode = l.Prev
+		}
+	}
+	return nextNode
+}
 
 func CreateList()*MyList{
 	myList := new(MyList)
-	myList.head = new(MyListNode)
-	myList.tail = myList.head
-	myList.len = 0
+	myList.Head = new(MyListNode)
+	myList.Tail = myList.Head
+	myList.Len = 0
 	return myList
 }
