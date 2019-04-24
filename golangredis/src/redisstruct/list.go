@@ -5,6 +5,7 @@ var (
 	TAIL_DIRECTION int64 = 2
 )
 
+
 //代表一个节点
 type MyListNode struct{
 	Prev, Next *MyListNode
@@ -56,6 +57,9 @@ func (l *MyList) PushBack(v interface{})*MyList{
 		l.Tail = tmp
 		tmp.Prev = t
 		l.Len++
+		if l.Len == 2 {
+			l.Head.Next = l.Tail
+		}
 	}
 	return l
 }
