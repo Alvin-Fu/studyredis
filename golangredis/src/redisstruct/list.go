@@ -1,10 +1,14 @@
 package redisstruct
 
+<<<<<<< Updated upstream
 var (
 	HEAD_DIRECTION int64 = 1
 	TAIL_DIRECTION int64 = 2
 )
 
+=======
+import "fmt"
+>>>>>>> Stashed changes
 
 //代表一个节点
 type MyListNode struct{
@@ -49,6 +53,7 @@ func (l *MyList) PushBack(v interface{})*MyList{
 		l.Len++
 	} else {
 		tmp := &MyListNode{
+<<<<<<< Updated upstream
 			Prev:l.Tail,
 			Next:nil,
 			Value: v,
@@ -61,6 +66,18 @@ func (l *MyList) PushBack(v interface{})*MyList{
 			l.Head.Next = l.Tail
 		}
 	}
+=======
+			prev:nil,
+			next:nil,
+			value: v,
+		}
+		fmt.Println(tmp)
+		tmp.prev = l.tail
+		l.head = l.tail
+		l.tail.next = tmp
+		l.len++
+	//}
+>>>>>>> Stashed changes
 	return l
 }
 

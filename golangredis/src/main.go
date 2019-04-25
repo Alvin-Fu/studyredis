@@ -8,7 +8,11 @@ import (
 func main(){
 	l := redisstruct.CreateList()
 	l = l.PushBack(1)
+<<<<<<< Updated upstream
 	fmt.Println(l.Head.Value,l.Tail.Value,l.Len)
+=======
+	fmt.Println(l)
+>>>>>>> Stashed changes
 	l = l.PushBack(2)
 	fmt.Println(l.Head.Value,l.Tail.Value,l.Len)
 	l = l.PushBack(3)
