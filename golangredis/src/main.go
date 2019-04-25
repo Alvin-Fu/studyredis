@@ -19,14 +19,14 @@ func main(){
 	for {
 		if node != nil {
 			fmt.Println("node next:",node.Value,node)
-			fmt.Println(node.Next.Value)
+			//fmt.Println(node.Next.Value)
 
 		} else{
 			break
 		}
 		node = node.Next
 	}
-	fmt.Println("node----",node.GetValue())
+	//fmt.Println("node----",node.GetValue())
 	fmt.Println(iter)
 	fmt.Println(l.Len)
 }
