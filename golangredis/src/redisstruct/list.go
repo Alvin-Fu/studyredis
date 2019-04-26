@@ -50,11 +50,13 @@ func (l *MyList) PushBack(v interface{})*MyList{
 		l.Len++
 	} else {
 		tmp := &MyListNode{
-			Prev:l.Tail,
+			Prev:nil,
 			Next:nil,
 			Value: v,
 		}
-		t := l.Tail
+		var t = new(MyListNode)
+		tmp.Prev = l.Tail
+		*t = *l.Tail
 		l.Tail = tmp
 		tmp.Prev = t
 		l.Len++
