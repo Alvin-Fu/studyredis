@@ -31,7 +31,7 @@
 
 #include <stdlib.h>
 #include "adlist.h"
-#include "zmalloc.h"
+
 
 int main(){
     list* l = listCreate();
@@ -63,6 +63,20 @@ list *listCreate(void)
     return list;
 }
 
+void *zmalloc(size_t size) {
+    void *ptr = malloc(size+PREFIX_SIZE);
+
+    if (!ptr) zmalloc_oom_handler(size);
+#ifdef HAVE_MALLOC_SIZE
+    update_zmalloc_stat_alloc(zmalloc_size(ptr));
+    return ptr;
+#else
+    *((size_t*)ptr) = size;
+    update_zmalloc_stat_alloc(size+PREFIX_SIZE);
+    return (char*)ptr+PREFIX_SIZE;
+#endif
+}
+
 /* Remove all the elements from the list without destroying the list itself. */
 void listEmpty(list *list)
 {
@@ -79,6 +93,23 @@ void listEmpty(list *list)
     }
     list->head = list->tail = NULL;
     list->len = 0;
+}
+void zfree(void *ptr) {
+#ifndef HAVE_MALLOC_SIZE
+    void *realptr;
+    size_t oldsize;
+#endif
+
+    if (ptr == NULL) return;
+#ifdef HAVE_MALLOC_SIZE
+    update_zmalloc_stat_free(zmalloc_size(ptr));
+    free(ptr);
+#else
+    realptr = (char*)ptr-PREFIX_SIZE;
+    oldsize = *((size_t*)realptr);
+    update_zmalloc_stat_free(oldsize+PREFIX_SIZE);
+    free(realptr);
+#endif
 }
 
 /* Free the whole list.

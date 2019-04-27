@@ -1,29 +1,29 @@
-package redisstruct
+package slist
 
 var (
-	HEAD_DIRECTION int64 = 1
-	TAIL_DIRECTION int64 = 2
+	HEAD_DIRECTION int = 1
+	TAIL_DIRECTION int = 2
 )
 
-
+//实现一个双链表
 
 //代表一个节点
-type MyListNode struct{
-	Next,Prev *MyListNode
-	Value interface{}
+type MyListNode struct {
+	Next, Prev *MyListNode
+	Value      interface{}
 }
 
-func (m *MyListNode) GetValue()interface{}{
+func (m *MyListNode) GetValue() interface{} {
 	return m.Value
 }
 
-//func (m *MyListNode) GetPrev()*MyListNode{
-//	if p := m.Prev; p != nil {
-//		return p
-//	}
-//	return nil
-//}
-func (m *MyListNode) GetNext()*MyListNode{
+func (m *MyListNode) GetPrev() *MyListNode {
+	if p := m.Prev; p != nil {
+		return p
+	}
+	return nil
+}
+func (m *MyListNode) GetNext() *MyListNode {
 	if p := m.Next; p != nil {
 		return p
 	}
@@ -31,74 +31,74 @@ func (m *MyListNode) GetNext()*MyListNode{
 }
 
 //连表
-type MyList struct{
-	Head,Tail *MyListNode		//头结点和尾节点
-	Len int64					//链表的长度
+type MyList struct {
+	Head, Tail *MyListNode //头结点和尾节点
+	Len        int         //链表的长度
 }
 
-
-
-func (l *MyList) PushBack(v interface{})*MyList{
-	tmp := &MyListNode{
-		//Prev:nil,
-		Next:nil,
-		Value: v,
-	}
-	if  l.Len == 0 {
-		l.Head.Next = tmp
-		//l.Tail.Prev = tmp
-		l.Len++
-	} else {
-
-		tmp := &MyListNode{
-			Prev:nil,
-			Next:nil,
-			Value: v,
-		}
-		var t = new(MyListNode)
-		tmp.Prev = l.Tail
-		*t = *l.Tail
+func (l *MyList) PushBack(v interface{}) {
+	tmp := new(MyListNode)
+	tmp.Value = v
+	tmp.Prev = nil
+	tmp.Next = tmp.Prev
+	if l.Len == 0 {
+		l.Head = tmp
 		l.Tail = tmp
-		tmp.Prev = t
-		l.Len++
-		if l.Len == 2 {
-			l.Head.Next = l.Tail
-
-		}
+	} else {
+		//t := l.Tail
+		l.Tail.Next = tmp
+		tmp.Prev = l.Tail
+		l.Tail = tmp
 	}
+	l.Len++
+}
+func (l *MyList) PushFront(v interface{}){
+	tmp := new(MyListNode)
+	tmp.Value = v
+	tmp.Prev = nil
+	tmp.Next = tmp.Prev
+	if l.Len == 0 {
+		l.Head = tmp
+		l.Tail = tmp
+	} else {
+		tmp.Next = l.Head
+		l.Head.Prev = tmp
+		l.Head = tmp
+	}
+	l.Len++
 
-	return l
 }
 
 
 //链表迭代器
 type MyListIter struct {
-	Next,Prev *MyListNode	//下一个节点
-	Direction int64 	//方向
+	Next      *MyListNode //下一个节点
+	Direction int       //方向
 }
-func CreateIter(l *MyList,direction int64)*MyListIter{
+
+func CreateIter(l *MyList, direction int) *MyListIter {
 	myListIter := new(MyListIter)
-	if direction == HEAD_DIRECTION{
+	if direction == HEAD_DIRECTION {
 		myListIter.Next = l.Head
 	} else {
-		//myListIter.Next = l.Tail
+		myListIter.Next = l.Tail
 	}
 	myListIter.Direction = direction
 	return myListIter
 }
-func MyListNext(l *MyListIter)*MyListNode{
+func (l *MyListIter) MyListNext() *MyListNode {
 	nextNode := new(MyListNode)
-	if l.Next != nil {
-		if l.Direction == HEAD_DIRECTION {
-			nextNode = l.Next
-		} else {
-			nextNode = l.Prev
-		}
+	nextNode = l.Next
+	if l.Direction == HEAD_DIRECTION {
+		l.Next = l.Next.GetNext()
+	} else {
+		l.Next = l.Next.GetPrev()
 	}
+
 	return nextNode
 }
 
-func CreateList()*MyList{
+func CreateList() *MyList {
 	myList := new(MyList)
 	tmp := new(MyListNode)
 	myList.Head = tmp
