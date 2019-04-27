@@ -9,7 +9,7 @@ var (
 
 //代表一个节点
 type MyListNode struct{
-	Prev, Next *MyListNode
+	Next,Prev *MyListNode
 	Value interface{}
 }
 
@@ -17,12 +17,12 @@ func (m *MyListNode) GetValue()interface{}{
 	return m.Value
 }
 
-func (m *MyListNode) GetPrev()*MyListNode{
-	if p := m.Prev; p != nil {
-		return p
-	}
-	return nil
-}
+//func (m *MyListNode) GetPrev()*MyListNode{
+//	if p := m.Prev; p != nil {
+//		return p
+//	}
+//	return nil
+//}
 func (m *MyListNode) GetNext()*MyListNode{
 	if p := m.Next; p != nil {
 		return p
@@ -32,23 +32,24 @@ func (m *MyListNode) GetNext()*MyListNode{
 
 //连表
 type MyList struct{
-	Head, Tail *MyListNode		//头结点和尾节点
+	Head,Tail *MyListNode		//头结点和尾节点
 	Len int64					//链表的长度
 }
 
 
 
 func (l *MyList) PushBack(v interface{})*MyList{
-	if l.Tail.Next == nil && l.Len == 0 {
-		tmp := &MyListNode{
-			Prev:nil,
-			Next:nil,
-			Value: v,
-		}
-		l.Head = tmp
-		l.Tail = tmp
+	tmp := &MyListNode{
+		//Prev:nil,
+		Next:nil,
+		Value: v,
+	}
+	if  l.Len == 0 {
+		l.Head.Next = tmp
+		//l.Tail.Prev = tmp
 		l.Len++
 	} else {
+
 		tmp := &MyListNode{
 			Prev:nil,
 			Next:nil,
@@ -62,6 +63,7 @@ func (l *MyList) PushBack(v interface{})*MyList{
 		l.Len++
 		if l.Len == 2 {
 			l.Head.Next = l.Tail
+
 		}
 	}
 
@@ -79,7 +81,7 @@ func CreateIter(l *MyList,direction int64)*MyListIter{
 	if direction == HEAD_DIRECTION{
 		myListIter.Next = l.Head
 	} else {
-		myListIter.Next = l.Tail
+		//myListIter.Next = l.Tail
 	}
 	myListIter.Direction = direction
 	return myListIter
@@ -98,8 +100,9 @@ func MyListNext(l *MyListIter)*MyListNode{
 
 func CreateList()*MyList{
 	myList := new(MyList)
-	myList.Head = new(MyListNode)
-	myList.Tail = myList.Head
+	tmp := new(MyListNode)
+	myList.Head = tmp
+	//myList.Tail = tmp
 	myList.Len = 0
 	return myList
 }

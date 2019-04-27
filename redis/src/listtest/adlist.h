@@ -54,29 +54,23 @@ typedef struct list {
 } list;
 
 /* Functions implemented as macros */
-//反回长度
 #define listLength(l) ((l)->len)
-//返回头节点
 #define listFirst(l) ((l)->head)
 #define listLast(l) ((l)->tail)
-//返回当前节点的上一个节点
 #define listPrevNode(n) ((n)->prev)
 #define listNextNode(n) ((n)->next)
 #define listNodeValue(n) ((n)->value)
-//设置复制链表时的回调函数
+
 #define listSetDupMethod(l,m) ((l)->dup = (m))
-//释放链表的回调函数
 #define listSetFreeMethod(l,m) ((l)->free = (m))
-//比较链表节点的回调函数
 #define listSetMatchMethod(l,m) ((l)->match = (m))
-//获取复制链表时的回调函数
+
 #define listGetDupMethod(l) ((l)->dup)
 #define listGetFree(l) ((l)->free)
 #define listGetMatchMethod(l) ((l)->match)
 
 /* Prototypes */
 list *listCreate(void);
-//遍历并释放所有的节点
 void listRelease(list *list);
 void listEmpty(list *list);
 list *listAddNodeHead(list *list, void *value);
@@ -86,10 +80,8 @@ void listDelNode(list *list, listNode *node);
 listIter *listGetIterator(list *list, int direction);
 listNode *listNext(listIter *iter);
 void listReleaseIterator(listIter *iter);
-//复制链表，如果设置 void *(*dup)(void *ptr)就使用
 list *listDup(list *orig);
 listNode *listSearchKey(list *list, void *key);
-//返回指定节点的索引
 listNode *listIndex(list *list, long index);
 void listRewind(list *list, listIter *li);
 void listRewindTail(list *list, listIter *li);

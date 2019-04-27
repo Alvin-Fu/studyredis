@@ -6,6 +6,7 @@ func main(){
 
 	//l := redisstruct.CreateList()
 	//l = l.PushBack(1)
+
 	//iter := redisstruct.CreateIter(l,redisstruct.HEAD_DIRECTION)
 	//fmt.Println(l)
 	//fmt.Println(l.Head.Value,l.Tail.Value,l.Len)
@@ -23,6 +24,7 @@ func main(){
 	//
 	//node := redisstruct.MyListNext(iter)
 	//fmt.Println("node next:",node.Value,node,&node)
+
 	//for {
 	//	if node != nil {
 	//		fmt.Println("node next:",node.Value,node)
@@ -33,6 +35,7 @@ func main(){
 	//	}
 	//	node = node.Next
 	//}
+
 	//fmt.Println("node----",node)
 	//fmt.Println(iter)
 	//fmt.Println(l.Len)
@@ -47,5 +50,6 @@ func main(){
 	//fmt.Println(ln.Front().GetList())
 	//fmt.Println(ln.Front().Value,"---",ln.Front().Prev(),"---",ln.Front().Next(),"---",ln.Front().Next().Value,
 	//	"---",ln.Front().Next().Prev(),"--",ln.Front().Next().Next().GetList())
+
 }
 
