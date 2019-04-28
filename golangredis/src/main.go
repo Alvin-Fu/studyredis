@@ -1,9 +1,20 @@
 package main
 
+import (
+	"list"
+	"fmt"
+)
+
 func main(){
-
-
-
+	myList := linklist.CreateList()
+	myList.PushBack(10)
+	myList.PushBack(100)
+	myList.PushBack(100)
+	tmp := myList.Head
+	for i := 0; i < myList.Len; i++{
+		fmt.Println(tmp.Value)
+		tmp = tmp.Next
+	}
 	//l := redisstruct.CreateList()
 	//l = l.PushBack(1)
 

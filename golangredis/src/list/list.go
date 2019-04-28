@@ -1,3 +1,4 @@
+
 package list
 //迭代器方向
 //实现了一个单链表
@@ -42,6 +43,7 @@ func (i *ListIter) Next()*MyListNode{
 
 
 type List struct{
+
 	head *MyListNode
 	len int
 }

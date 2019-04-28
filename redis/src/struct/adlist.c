@@ -71,7 +71,7 @@ void listEmpty(list *list)
 }
 
 /* Free the whole list.
- *
+ *释放链表
  * This function can't fail. */
 void listRelease(list *list)
 {
@@ -179,16 +179,16 @@ void listDelNode(list *list, listNode *node)
     list->len--;
 }
 
-/* Returns a list iterator 'iter'. After the initialization every
- * call to listNext() will return the next element of the list.
- *
+/* Returns a list iterator 'iter'. After the initialization every call to listNext()
+ *will return the next element of the list.
+ *创建一个迭代器
  * This function can't fail. */
 listIter *listGetIterator(list *list, int direction)
 {
     listIter *iter;
 
     if ((iter = zmalloc(sizeof(*iter))) == NULL) return NULL;
-    if (direction == AL_START_HEAD)
+    if (direction == AL_START_HEAD)     //设置迭代器的方向
         iter->next = list->head;
     else
         iter->next = list->tail;
@@ -196,12 +196,12 @@ listIter *listGetIterator(list *list, int direction)
     return iter;
 }
 
-/* Release the iterator memory */
+/* Release the iterator memory 释放迭代器*/
 void listReleaseIterator(listIter *iter) {
     zfree(iter);
 }
 
-/* Create an iterator in the list private iterator structure */
+/* Create an iterator in the list private iterator structure重置迭代器 */
 void listRewind(list *list, listIter *li) {
     li->next = list->head;
     li->direction = AL_START_HEAD;
@@ -224,7 +224,7 @@ void listRewindTail(list *list, listIter *li) {
  * while ((node = listNext(iter)) != NULL) {
  *     doSomethingWith(listNodeValue(node));
  * }
- *
+ *返回迭代器的下一个节点
  * */
 listNode *listNext(listIter *iter)
 {
@@ -289,6 +289,7 @@ list *listDup(list *orig)
  * NULL is returned. */
 listNode *listSearchKey(list *list, void *key)
 {
+    //查找指定的key节点
     listIter iter;
     listNode *node;
 
@@ -326,7 +327,7 @@ listNode *listIndex(list *list, long index) {
     return n;
 }
 
-/* Rotate the list removing the tail node and inserting it to the head. */
+/* Rotate the list removing the tail node and inserting it to the head. 旋转*/
 void listRotate(list *list) {
     listNode *tail = list->tail;
 
