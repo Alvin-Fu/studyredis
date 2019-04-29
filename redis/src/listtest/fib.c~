@@ -10,16 +10,3 @@ int main(){
    int l = fib(100);
    printf("fib:%d\n",l);
 }
-//int Fib(int n,int(*fib)());
-//
-//int fib(){
-//    int a = 0;
-//    int b = 1;
-//    return fib(){
-//
-//    }
-//}
-
-
-        
-

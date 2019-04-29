@@ -45,7 +45,6 @@ func (l *MyList) PushBack(v interface{}) {
 		l.Head = tmp
 		l.Tail = tmp
 	} else {
-		//t := l.Tail
 		l.Tail.Next = tmp
 		tmp.Prev = l.Tail
 		l.Tail = tmp
@@ -66,7 +65,6 @@ func (l *MyList) PushFront(v interface{}){
 		l.Head = tmp
 	}
 	l.Len++
-
 }
 
 
@@ -102,7 +100,6 @@ func CreateList() *MyList {
 	myList := new(MyList)
 	tmp := new(MyListNode)
 	myList.Head = tmp
-	//myList.Tail = tmp
 	myList.Len = 0
 	return myList
 }

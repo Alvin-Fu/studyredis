@@ -1,31 +1,52 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"time"
+)
 
 
 func main(){
-	var n int64 = 100
+	var n int64 = 50
+	t1 := time.Now()
+
 	fmt.Println( Fibo3(n))
-	fmt.Println(fib(n))
-	//Fib(n,fib)
+	fmt.Println(time.Since(t1))
+	//t2 := time.Now()
+	//fmt.Println(fib(n))
+	//fmt.Println(time.Since(t2))
+	t3 := time.Now()
+	Fib(n,fib)
+	fmt.Println(time.Since(t3))
 
 }
-//go中的匿名函数
+//go中的匿名函数，作为参数
 func Fib(n int64, fib func(n int64)int64){
-	t := fib(n)
-	fmt.Println(t)
+	fmt.Println(fib(n))
 }
 
 func fib(n int64)int64{
-	var rue int64
-	if n <= 1{
-		rue = 1
+	if n == 0 {
+		return 0
+	} else if n == 1{
+		return 1
+	} else if n > 1{
+		return fib(n-1) +fib(n-2)
 	} else {
-		rue = fib(n-1) + fib(n-2)
+		return 0
 	}
-	return rue
+}
+func fib1()func() int64{
+	var a, b int64 = 0, 1
+	return func() int64 {
+		a, b = b, a + b
+		return a
+	}
 }
 
+
+
+//匿名函数版
 func Fibo3(n int64) int64 {
 	if n < 0 {
 		return -1
@@ -38,11 +59,12 @@ func Fibo3(n int64) int64 {
 		return result
 	}
 }
-
+//作为返回值
 func Fibonacci() func() int64 {
 	var a, b int64 = 0, 1
 	return func() int64 {
 		a, b = b, a+b
+		fmt.Println(a)
 		return a
 	}
 }
