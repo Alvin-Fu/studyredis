@@ -7,7 +7,7 @@ import (
 
 
 func main(){
-	var n int64 = 50
+	var n int64 = 5
 	t1 := time.Now()
 
 	fmt.Println( Fibo3(n))
@@ -15,9 +15,9 @@ func main(){
 	//t2 := time.Now()
 	//fmt.Println(fib(n))
 	//fmt.Println(time.Since(t2))
-	t3 := time.Now()
-	Fib(n,fib)
-	fmt.Println(time.Since(t3))
+	//t3 := time.Now()
+	//Fib(n,fib)
+	//fmt.Println(time.Since(t3))
 
 }
 //go中的匿名函数，作为参数

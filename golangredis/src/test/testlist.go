@@ -7,8 +7,8 @@ import (
 )
 
 func main(){
-	//testPushFront()
-	//testPushBack()
+	testPushFront()
+	testPushBack()
 	testSPushBack()
 	testSPushFront()
 }

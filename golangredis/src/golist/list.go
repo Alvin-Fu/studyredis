@@ -23,11 +23,16 @@ type Element struct {
 	next, prev *Element
 
 	// The list to which this element belongs.头节点
+	//可以理解为保存了一个链表的头节点
 	list *List
 
 	// The value stored with this element.
 	Value interface{}
 }
+func (e *Element) GetList()interface{}{
+	return e.list
+}
+
 
 // Next returns the next list element or nil.获取下一个节点
 func (e *Element) Next() *Element {
