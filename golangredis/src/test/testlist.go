@@ -7,8 +7,8 @@ import (
 )
 
 func main(){
-	testPushFront()
-	testPushBack()
+	//testPushFront()
+	//testPushBack()
 	testSPushBack()
 	testSPushFront()
 }
@@ -47,13 +47,20 @@ func testSPushBack(){
 	l.PushBack(1)
 	l.PushBack(2)
 	l.PushBack(3)
-	l.PushBack(3)
+	l.PushBack(32)
+	l.PushBack(12)
+	l.PushBack(22)
+	l.PushBack(34)
+	l.PushBack(37)
 	tmp := l.Head
 	for i := 0; i < l.Len; i++{
 		fmt.Println(tmp.Value,tmp.Next)
 		tmp = tmp.GetNext()
 	}
-	iter := slist.CreateIter(l,2)
+	iter := slist.CreateIter(l,1)
+	fmt.Println("迭代器遍历",iter.MyListNext().GetValue())
+	fmt.Println("迭代器遍历",iter.MyListNext().GetValue())
+	fmt.Println("迭代器遍历",iter.MyListNext().GetValue())
 	fmt.Println("迭代器遍历",iter.MyListNext().GetValue())
 	fmt.Println("迭代器遍历",iter.MyListNext().GetValue())
 	fmt.Println("迭代器遍历",iter.MyListNext().GetValue())

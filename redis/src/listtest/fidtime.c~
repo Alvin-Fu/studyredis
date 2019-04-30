@@ -1,0 +1,48 @@
+#include<stdio.h>
+#include<sys/time.h> //注意引用这个头文件
+#include<unistd.h>
+
+int delay(int time)
+{
+//这里用来表示你自己要运行的程序
+}
+
+int sfib(int i, int* j){
+    //printf("j的值%d",*j);
+    int t=i;
+    i=*j;
+    *j=t+*j;
+   // printf("i的值%d\n",i);
+    return i;
+}
+
+int (*fib())(int,int*){
+    return sfib;
+}
+
+int main()
+{
+//定义两个结构体，来记录开始和结束时间
+    struct  timeval start;
+    struct  timeval end;
+    //记录两个时间差
+    unsigned  long diff;
+    //第一次获取时间，即表示开始记时
+    gettimeofday(&start,NULL);
+    int rues;
+	int tmp=1;
+    int (*p)(int,int*);
+    p=fib();
+    int i=0;
+    while(i<30){
+        rues=p(rues,&tmp);
+        i++;  
+    }
+    printf("斐波那契数列结果%d\n",rues);
+    //第二次获取时间，即表示结束记时
+    gettimeofday(&end,NULL);
+    //计算时间差，并打印
+    diff = 1000000 * (end.tv_sec-start.tv_sec)+ end.tv_usec-start.tv_usec;
+    printf("单位时微秒thedifferenceis%ld\n",diff);
+    return 0;
+}

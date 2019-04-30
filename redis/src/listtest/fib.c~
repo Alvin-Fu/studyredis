@@ -7,6 +7,36 @@ int fib(int n)
     if (n>1) return fib(n-1)+fib(n-2);
 }
 int main(){
-   int l = fib(100);
-   printf("fib:%d\n",l);
+//   int l = fib(100);
+//   printf("fib:%d\n",l);
+    int max =0;
+    int tmp =1;
+    int i = 0;
+    int (*p)(int, int);     //定义了一个指向函数（该函数的返回值为int，有两个均为int的形参）的指针
+    p=f();
+    for (i = 0; i < 100; i++){
+        max = p(max,tmp);
+        tmp = max - tmp;
+    }
+    printf("max=%d/n",max);
+    return 1;
+
 }
+int get_big(int i, int j)
+{
+    i , j = j, i + j;
+    return i;
+}
+
+int (*f())(int,int)    //f（int a）是一个函数，这个函数的返回值是一个
+{                             //指向函数（该函数的返回值值为int，有两个int型的形参）的指针
+    int  i =0;
+     int j = 1;
+    return get_big;
+}
+
+
+
+
+        
+
