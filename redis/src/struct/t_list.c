@@ -39,10 +39,14 @@
  * There is no need for the caller to increment the refcount of 'value' as
  * the function takes care of it if needed. */
 void listTypePush(robj *subject, robj *value, int where) {
+    //判断subject的类型，是否是链表，如果不是则报错
     if (subject->encoding == OBJ_ENCODING_QUICKLIST) {
+        //判断在头部插入还是尾部
         int pos = (where == LIST_HEAD) ? QUICKLIST_HEAD : QUICKLIST_TAIL;
+        //对value进行编码
         value = getDecodedObject(value);
         size_t len = sdslen(value->ptr);
+        //因为底层使用的快速链表，因此使用快速链表的插入
         quicklistPush(subject->ptr, value->ptr, len, pos);
         decrRefCount(value);
     } else {
@@ -70,7 +74,7 @@ robj *listTypePop(robj *subject, int where) {
     }
     return value;
 }
-
+//获取链表的长度
 unsigned long listTypeLength(const robj *subject) {
     if (subject->encoding == OBJ_ENCODING_QUICKLIST) {
         return quicklistCount(subject->ptr);
@@ -79,7 +83,7 @@ unsigned long listTypeLength(const robj *subject) {
     }
 }
 
-/* Initialize an iterator at the specified index. */
+/* Initialize an iterator at the specified index.初始化一个迭代器 */
 listTypeIterator *listTypeInitIterator(robj *subject, long index,
                                        unsigned char direction) {
     listTypeIterator *li = zmalloc(sizeof(listTypeIterator));
@@ -108,7 +112,7 @@ void listTypeReleaseIterator(listTypeIterator *li) {
 
 /* Stores pointer to current the entry in the provided entry structure
  * and advances the position of the iterator. Returns 1 when the current
- * entry is in fact an entry, 0 otherwise. */
+ * entry is in fact an entry, 0 otherwise. 获取下一个节点*/
 int listTypeNext(listTypeIterator *li, listTypeEntry *entry) {
     /* Protect from converting when iterating */
     serverAssert(li->subject->encoding == li->encoding);
@@ -642,7 +646,7 @@ int serveClientBlockedOnList(client *receiver, robj *key, robj *dstkey, redisDb 
         addReplyMultiBulkLen(receiver,2);
         addReplyBulk(receiver,key);
         addReplyBulk(receiver,value);
-        
+
         /* Notify event. */
         char *event = (where == LIST_HEAD) ? "lpop" : "rpop";
         notifyKeyspaceEvent(NOTIFY_LIST,event,key,receiver->db->id);
