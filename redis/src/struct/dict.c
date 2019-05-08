@@ -72,8 +72,9 @@ static int _dictInit(dict *ht, dictType *type, void *privDataPtr);
 /* -------------------------- hash functions -------------------------------- */
 
 static uint8_t dict_hash_function_seed[16];
-
+//
 void dictSetHashFunctionSeed(uint8_t *seed) {
+    //½øÐÐÄÚ´æ¿½±´
     memcpy(dict_hash_function_seed,seed,sizeof(dict_hash_function_seed));
 }
 
