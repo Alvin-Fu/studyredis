@@ -132,7 +132,7 @@ typedef void (dictScanBucketFunction)(void *privdata, dictEntry **bucketref);
     else \
         (entry)->key = (_key_); \
 } while(0)
-
+//比较key值，如果有实现
 #define dictCompareKeys(d, key1, key2) \
     (((d)->type->keyCompare) ? \
         (d)->type->keyCompare((d)->privdata, key1, key2) : \
@@ -149,7 +149,10 @@ typedef void (dictScanBucketFunction)(void *privdata, dictEntry **bucketref);
 #define dictIsRehashing(d) ((d)->rehashidx != -1)
 
 /* API */
+//实现的api
+//创建一个dict
 dict *dictCreate(dictType *type, void *privDataPtr);
+//dict扩展
 int dictExpand(dict *d, unsigned long size);
 int dictAdd(dict *d, void *key, void *val);
 dictEntry *dictAddRaw(dict *d, void *key, dictEntry **existing);
