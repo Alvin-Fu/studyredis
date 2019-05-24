@@ -21,10 +21,9 @@ import (
 	"fmt"
 	"net"
 	"strings"
-
-	"github.com/XiaoMi/Gaea/log"
-	"github.com/XiaoMi/Gaea/mysql"
-	"github.com/XiaoMi/Gaea/util/sync2"
+	"gaea/mysql"
+	"gaea/util/sync2"
+	"gaea/log"
 )
 
 // DirectConnection means connection to backend mysql

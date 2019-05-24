@@ -18,7 +18,7 @@ import (
 	"math/rand"
 	"time"
 
-	"github.com/XiaoMi/Gaea/core/errors"
+	"gaea/core/errors"
 )
 
 // calculate gcd ?

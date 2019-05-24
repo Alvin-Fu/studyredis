@@ -20,8 +20,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/XiaoMi/Gaea/mysql"
-	"github.com/XiaoMi/Gaea/util"
+	"gaea/mysql"
+	"gaea/util"
 )
 
 const (

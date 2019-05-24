@@ -18,9 +18,9 @@ import (
 	"fmt"
 	"sync"
 
-	"github.com/XiaoMi/Gaea/cc/proxy"
-	"github.com/XiaoMi/Gaea/log"
-	"github.com/XiaoMi/Gaea/models"
+	"gaea/models"
+	"gaea/log"
+	"gaea/cc/proxy"
 )
 
 // QueryNamespace return information of namespace specified by names

@@ -17,7 +17,7 @@ package proxy
 import (
 	"encoding/json"
 
-	"github.com/XiaoMi/Gaea/util/requests"
+	"gaea/util/requests"
 )
 
 // APIClient api client

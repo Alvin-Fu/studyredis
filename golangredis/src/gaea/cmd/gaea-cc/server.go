@@ -15,17 +15,14 @@
 package main
 
 import (
-	"fmt"
 	"net"
+	"gaea/models"
+	"compress/gzip"
+	"gaea/log"
 	"net/http"
+	"gaea/cc/service"
 	"strings"
-
-	"github.com/gin-contrib/gzip"
-	"github.com/gin-gonic/gin"
-
-	"github.com/XiaoMi/Gaea/cc/service"
-	"github.com/XiaoMi/Gaea/log"
-	"github.com/XiaoMi/Gaea/models"
+	"fmt"
 )
 
 type server struct {

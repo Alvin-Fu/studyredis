@@ -20,11 +20,10 @@ import (
 	"os"
 	"os/signal"
 	"sync"
+	"gaea/log/xlog"
+	"gaea/log"
+	"gaea/models"
 	"syscall"
-
-	"github.com/XiaoMi/Gaea/log"
-	"github.com/XiaoMi/Gaea/log/xlog"
-	"github.com/XiaoMi/Gaea/models"
 )
 
 var ccConfigFile = flag.String("c", "./etc/gaea_cc.ini", "gaea cc配置")

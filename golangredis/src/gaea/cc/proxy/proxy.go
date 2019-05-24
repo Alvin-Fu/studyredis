@@ -18,8 +18,8 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/XiaoMi/Gaea/log"
-	"github.com/XiaoMi/Gaea/models"
+	"gaea/models"
+	"gaea/log"
 )
 
 // Stats proxy stats

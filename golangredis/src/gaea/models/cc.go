@@ -15,7 +15,7 @@
 package models
 
 import (
-	"github.com/go-ini/ini"
+
 )
 
 // CCConfig means gaea cc config

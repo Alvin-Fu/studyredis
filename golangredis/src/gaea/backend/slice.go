@@ -34,11 +34,11 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/XiaoMi/Gaea/core/errors"
-	"github.com/XiaoMi/Gaea/log"
-	"github.com/XiaoMi/Gaea/models"
-	"github.com/XiaoMi/Gaea/mysql"
-	"github.com/XiaoMi/Gaea/util"
+	"gaea/mysql"
+	"gaea/models"
+	"gaea/log"
+	"gaea/core/errors"
+	"gaea/util"
 )
 
 const (

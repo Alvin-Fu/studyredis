@@ -17,7 +17,7 @@ package models
 import (
 	"encoding/json"
 
-	"github.com/XiaoMi/Gaea/log"
+	"gaea/log"
 )
 
 // JSONEncode return json encoding of v

@@ -19,7 +19,7 @@ import (
 	"fmt"
 	"strconv"
 
-	"github.com/XiaoMi/Gaea/mysql"
+	"gaea/mysql"
 )
 
 // Namespace means namespace model stored in etcd
